@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+    <script>
+      function initializeApp(data) {
+        $("#userid").val(data.context.userId);
+      }
+
+      $(function() {
+        liff.init(function(data) {
+          initializeApp(data);
+        });
+
+        $("#ButtonGetProfile").click(function() {
+          liff.getProfile().then(profile => {
+            $("#UserInfo").val(profile.displayName);
+            alert("done");
+          });
+        });
+
+        $("#ButtonSendMsg").click(function() {
+          liff
+            .sendMessages([
+              {
+                type: "text",
+                text: $("#msg").val()
+              }
+            ])
+            .then(() => {
+              alert("done");
+              liff.closeWindow(); // 關掉頁面
+            });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button class="liff_btn">Get user profile</button>
+    <label>user id:</label>
+    <input class="form-control" type="text" id="userid" /> <br />
+    <button class="btn btn-primary" id="ButtonGetProfile">Get Profile</button>
+    <input class="form-control" type="text" id="UserInfo" /><br />
+    <label>要傳送的訊息:</label>
+    <input class="form-control" type="text" id="msg" value="測試" /><br />
+    <button class="btn btn-primary" id="ButtonSendMsg">要傳送的訊息</button>
+  </body>
+</html>
