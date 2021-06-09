@@ -31,7 +31,7 @@
             .sendMessages([
               {
                 type: "text",
-                text: ("#msg").val()
+                text: $("#msg").val()
               }
             ])
             .then(() => {
@@ -42,4 +42,14 @@
       });
     </script>
   </head>
+  <body>
+    <button class="liff_btn">Get user profile</button>
+    <label>user id:</label>
+    <input class="form-control" type="text" id="userid" /> <br />
+    <button class="btn btn-primary" id="ButtonGetProfile">Get Profile</button>
+    <input class="form-control" type="text" id="UserInfo" /><br />
+    <label>要傳送的訊息:</label>
+    <input class="form-control" type="text" id="msg" value="測試" /><br />
+    <button class="btn btn-primary" id="ButtonSendMsg">要傳送的訊息</button>
+  </body>
 </html>
